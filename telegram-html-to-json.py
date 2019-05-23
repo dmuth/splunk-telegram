@@ -7,6 +7,7 @@
 
 
 import argparse
+import datetime
 import json
 
 from bs4 import BeautifulSoup
@@ -67,6 +68,9 @@ def processFile(file):
 
 			if "date" not in row:
 				continue
+
+			row["date"] = datetime.datetime.strptime(row["date"], 
+				"%d.%m.%Y %H:%M:%S").strftime("%Y-%m-%dT%T.000")
 
 			print(json.dumps(row))
 
