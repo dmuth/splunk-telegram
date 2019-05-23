@@ -7,4 +7,5 @@ chats
 logs/
 
 data/
+!app/data
 
