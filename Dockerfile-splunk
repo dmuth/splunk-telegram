@@ -1,0 +1,12 @@
+#
+# Build our container that runs Splunk Lab with the Telegram app addin
+#
+
+FROM dmuth1/splunk-lab
+
+#
+# Copy in our application
+#
+COPY splunk-app/ /opt/splunk/etc/apps/splunk-telegram
+
+

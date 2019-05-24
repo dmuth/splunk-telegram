@@ -1,8 +1,11 @@
 
+# Vim
 *~
 *.swp
 
-chats
+
+# Ignore generated file
+user-prefs.conf 
 
 logs/
 

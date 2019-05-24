@@ -1,0 +1,18 @@
+#
+# Build our container to run the Python script that downloads 
+#
+
+FROM alpine:latest
+
+RUN apk add bash python3
+
+RUN mkdir /app
+
+COPY requirements.txt /app
+RUN pip3 install -r /app/requirements.txt
+
+COPY bin/telegram-html-to-json.py /app
+COPY entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
+
