@@ -4,8 +4,10 @@
 *.swp
 
 
+chats
+
 # Ignore generated file
-user-prefs.conf 
+user-prefs.conf
 
 logs/
 
