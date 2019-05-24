@@ -11,6 +11,5 @@ user-prefs.conf
 
 logs/
 
-data/
-!app/data
+splunk-data/
 
