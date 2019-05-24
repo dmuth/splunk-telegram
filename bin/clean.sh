@@ -12,9 +12,9 @@ pushd $(dirname $0)/..
 ./bin/stop.sh 
 
 echo "# "
-echo "# Removing data and logs..."
+echo "# Removing Splunk data..."
 echo "# "
-rm -rfv splunk-data/ logs/
+rm -rfv splunk-data/
 mkdir logs/
 touch logs/empty
 
