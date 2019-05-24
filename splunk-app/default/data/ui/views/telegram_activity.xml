@@ -49,6 +49,7 @@
     <panel>
       <title>Top Posters By Month</title>
       <chart>
+        <title>Users displayed are the top over all time, not necessarily the top users _each month_</title>
         <search>
           <query>index=main 
 | timechart span=$span$ limit=$num_top_posters_timechart$ useother=false count by name</query>
