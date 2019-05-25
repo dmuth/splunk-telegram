@@ -2,6 +2,18 @@
   <label>Telegram Activity</label>
   <description></description>
   <fieldset submitButton="true" autoRun="true">
+    <input type="dropdown" token="source" searchWhenChanged="true">
+      <label>Source</label>
+      <fieldForLabel>base</fieldForLabel>
+      <fieldForValue>source</fieldForValue>
+      <search>
+        <query>index=main | rex field=source "/logs/(?&lt;source2&gt;.*)" 
+| rex field=source "/logs/(?&lt;source_base&gt;.*)" 
+| stats values(source) AS source values(source_base) AS base by source_base</query>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
     <input type="time" token="range" searchWhenChanged="true">
       <label>Time Range</label>
       <default>
@@ -49,9 +61,8 @@
     <panel>
       <title>Top Posters By Month</title>
       <chart>
-        <title>Users displayed are the top over all time, not necessarily the top users _each month_</title>
         <search>
-          <query>index=main 
+          <query>index=main source=$source$
 | timechart span=$span$ limit=$num_top_posters_timechart$ useother=false count by name</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
@@ -97,7 +108,8 @@
       <title>Top Posters Over Time Range</title>
       <chart>
         <search>
-          <query>index=main | stats count by name |sort -count |head $num_top_posters$</query>
+          <query>index=main source=$source$
+| stats count by name |sort -count |head $num_top_posters$</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
           <sampleRatio>1</sampleRatio>
