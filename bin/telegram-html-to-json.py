@@ -47,6 +47,12 @@ def processFile(file):
 			html = div.findAll("div", {"class": "from_name"})
 			if (len(html)):
 				row["name"] = html[0].get_text().strip()
+				#
+				# Wow, really beautifulsoup?  Removing the semi-colon
+				# and not touching the rest of the entity?  Ugh.
+				# Looks like I'll have to do this by hand.
+				#
+				row["name"] = row["name"].replace("&apos", "'")
 				last_name = row["name"]
 
 			else:
@@ -55,6 +61,10 @@ def processFile(file):
 			html = div.findAll("div", {"class": "text"})
 			if (len(html)):
 				row["text"] = html[0].get_text().strip()
+				#
+				# Bugs in beautifulsoup, take 2.
+				#
+				row["text"] = row["text"].replace("&apos", "'")
 
 			html = div.findAll("div", {"class": "media_photo"})
 			if (len(html)):
