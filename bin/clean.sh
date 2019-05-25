@@ -15,6 +15,6 @@ echo "# "
 echo "# Removing Splunk data..."
 echo "# "
 rm -rfv splunk-data/
-mkdir logs/
+mkdir -p logs/
 touch logs/empty
 
