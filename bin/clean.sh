@@ -7,7 +7,7 @@
 # Errors are fatal
 set -e
 
-pushd $(dirname $0)/..
+pushd $(dirname $0)/.. > /dev/null
 
 ./bin/stop.sh 
 
