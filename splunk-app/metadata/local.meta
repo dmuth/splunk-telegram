@@ -1,3 +1,10 @@
 [views/telegram_activity]
 version = 7.2.5
-modtime = 1558820243.175668000
+modtime = 1558824301.165894000
+
+[views/tag_cloud]
+access = read : [ * ], write : [ * ]
+export = none
+owner = admin
+version = 7.2.5
+modtime = 1558824224.650630000

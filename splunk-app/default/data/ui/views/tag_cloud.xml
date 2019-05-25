@@ -1,0 +1,68 @@
+<form>
+  <label>Tag Cloud</label>
+  <description></description>
+  <fieldset submitButton="true" autoRun="true">
+    <input type="dropdown" token="source" searchWhenChanged="true">
+      <label>Source</label>
+      <fieldForLabel>base</fieldForLabel>
+      <fieldForValue>source</fieldForValue>
+      <search>
+        <query>index=main | rex field=source "/logs/(?&lt;source2&gt;.*)" 
+| rex field=source "/logs/(?&lt;source_base&gt;.*)" 
+| stats values(source) AS source values(source_base) AS base by source_base</query>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="time" token="range" searchWhenChanged="true">
+      <label>Time Range</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="numwords" searchWhenChanged="true">
+      <label>Number of Words</label>
+      <choice value="100">100</choice>
+      <choice value="250">250</choice>
+      <choice value="500">500</choice>
+      <choice value="1000">1000</choice>
+      <default>500</default>
+      <initialValue>500</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Tag Cloud</title>
+      <viz type="wordcloud_app.wordcloud">
+        <search>
+          <query>index=main source="$source$"  | eval word=split(text," ") | search word!="" | mvexpand word | eval len=len(word) | table word
+`comment("| bs4 textfield="word" ")`
+| cleantext textfield="word" base_type=lemma_pos remove_stopwords=t  ngram_range=1-1 ngram_mix=t keep_orig=t term_min_len=5
+| eval pos_zip = mvzip(pos_tag,'word',",")
+| eval no_ne = mvfilter(!match(pos_zip,"NNPS?,"))
+| rex field=no_ne mode=sed "s/[^,]+,([a-z]+)/\1/"
+`comment("| eval "word" = no_ne ")` |  stats count BY "word"
+| search "word"!=""
+| sort -count |  fields "word" count 
+| head $numwords$
+| rename "word" as "Top keywords"</query>
+          <earliest>$range.earliest$</earliest>
+          <latest>$range.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">665</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="wordcloud_app.wordcloud.alignmentMode">hovert</option>
+        <option name="wordcloud_app.wordcloud.backgroundColor">#222</option>
+        <option name="wordcloud_app.wordcloud.colorBy">colorMode</option>
+        <option name="wordcloud_app.wordcloud.colorMode">categorical</option>
+        <option name="wordcloud_app.wordcloud.maxColor">#3fc77a</option>
+        <option name="wordcloud_app.wordcloud.minColor">#d93f3c</option>
+        <option name="wordcloud_app.wordcloud.numOfBins">8</option>
+        <option name="wordcloud_app.wordcloud.splunkTastic">false</option>
+        <option name="wordcloud_app.wordcloud.useColors">true</option>
+      </viz>
+    </panel>
+  </row>
+</form>
