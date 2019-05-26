@@ -9,6 +9,24 @@ which is a generate Splunk platform build for ingesting data on an ad-hoc basis.
 You should check it out!
 
 
+## Requirements
+
+- Docker
+- HTML exports from a Telegram conversation, channel, or group.
+   - Exporting is explained further below
+
+
+## Usage
+
+- First step is to convert Telegram's HTML into JSON that Splunk can understand:
+   - `bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/1-telegram-html-to-json.sh` path/to/telegram-export/messages\*.html > logs/Group-Name.json`
+- Then, run Splunk:
+   - `SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/2-start-splunk.sh)`
+   - You'll be presented with a list of options to confirm, change your environment variables if you like and re-run, otherwise press ENTER to launch Splunk.
+
+By default, Splunk will be listening <a href="https://localhost:8000/">https://localhost:8000/</a>.
+
+
 ## Exporting Data From Telegram
 
 Telegram has a blog post which explains how to export data <a href="https://telegram.org/blog/export-and-more">over here</a>.
@@ -21,11 +39,6 @@ by going into the converstaion or group and manually exporting it:
 
 This will save the converstaion in Telegram's own HTML format, which we can then
 parse to extract messages.
-
-
-## Usage
-
-
 
 
 ## Licensing
