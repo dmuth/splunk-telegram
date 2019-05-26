@@ -37,10 +37,6 @@ You should check it out!
 By default, Splunk will be listening at <a href="https://localhost:8000/">https://localhost:8000/</a>.
 
 
-## Screenshots
-
-
-
 ## Exporting Data From Telegram
 
 Telegram has a blog post which explains how to export data <a href="https://telegram.org/blog/export-and-more">over here</a>.
