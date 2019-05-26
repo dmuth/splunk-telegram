@@ -1,0 +1,8 @@
+
+/**
+* Splunk needs to be restarted for these changes to be applied.
+*/
+.splunk-header.splunk-view.splunk-header.splunk-view > div[data-view="views/shared/appbar/Master"] {
+	background-color: #2B98D7;
+}
+
