@@ -9,6 +9,10 @@ set -e
 pushd $(dirname $0) > /dev/null
 cd ..
 
+echo "# "
+echo "# Building our images..."
+echo "# "
+./bin/build.sh
 
 echo "# "
 echo "# Pushing containers to Docker Hub..."
