@@ -1,5 +1,5 @@
 <form>
-  <label>Tag Cloud</label>
+  <label>Named Entities Cloud</label>
   <description></description>
   <fieldset submitButton="true" autoRun="true">
     <input type="dropdown" token="source" searchWhenChanged="true">
@@ -38,15 +38,16 @@
         <search>
           <query>index=main source="$source$"  | eval word=split(text," ") | search word!="" | mvexpand word | eval len=len(word) | table word
 `comment("| bs4 textfield="word" ")`
-| cleantext textfield="word" base_type=lemma_pos remove_stopwords=t  ngram_range=1-1 ngram_mix=t keep_orig=t term_min_len=5
+| cleantext textfield="word" base_type=lemma_pos remove_stopwords=t ngram_range=1-1 ngram_mix=t keep_orig=t term_min_len=5
 | eval pos_zip = mvzip(pos_tag,'word',",")
-| eval no_ne = mvfilter(!match(pos_zip,"NNPS?,"))
-| rex field=no_ne mode=sed "s/[^,]+,([a-z]+)/\1/"
-`comment("| eval "word" = no_ne ")` |  stats count BY "word"
-| search "word"!=""
-| sort -count |  fields "word" count 
-| head $numwords$
-| rename "word" as "Top keywords"</query>
+
+| eval "word" = no_ne | noop
+| eval ne = mvfilter(match(pos_zip,"NNPS?,"))
+| rex field=ne mode=sed "s/[^,]+,([a-z]+)/\1/"
+| stats count by ne
+
+| sort -count 
+| head $numwords$</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
         </search>

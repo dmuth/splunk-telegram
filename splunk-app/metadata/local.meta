@@ -7,4 +7,15 @@ access = read : [ * ], write : [ * ]
 export = none
 owner = admin
 version = 7.2.5
-modtime = 1558824224.650630000
+modtime = 1558892132.531955000
+
+[views/named_entities_cloud]
+access = read : [ * ], write : [ * ]
+export = none
+owner = admin
+version = 7.2.5
+modtime = 1558892124.835028000
+
+[nav/default]
+version = 7.2.5
+modtime = 1558891666.340490000
