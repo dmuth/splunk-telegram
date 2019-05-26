@@ -12,6 +12,13 @@ which is a generate Splunk platform build for ingesting data on an ad-hoc basis.
 You should check it out!
 
 
+## Screenshots
+
+<img src="img/pa-furry-stats.jpg" width="250" /> <img src="img/pa-furry-tag-cloud.jpg" width="250" /> <img src="img/snepchat-how-many-mows.jpg" title="Perch on Kieran" width="250" />
+<img src="img/snepchat-stats.jpg" title="Perch on Kieran" width="250" /> <img src="img/snepchat-tag-cloud.jpg" title="Perch on Kieran" width="250" /> <img src="img/snepchat-timewrapped-mows.jpg" title="Perch on Kieran" width="250" />
+
+
+
 ## Requirements
 
 - Docker
