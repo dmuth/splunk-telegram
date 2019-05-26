@@ -21,6 +21,15 @@
         <latest>now</latest>
       </default>
     </input>
+    <input type="dropdown" token="min_word_length" searchWhenChanged="true">
+      <label>Min Word Length</label>
+      <choice value="3">3</choice>
+      <choice value="4">4</choice>
+      <choice value="5">5</choice>
+      <choice value="6">6</choice>
+      <default>5</default>
+      <initialValue>5</initialValue>
+    </input>
     <input type="dropdown" token="numwords" searchWhenChanged="true">
       <label>Number of Words</label>
       <choice value="100">100</choice>
@@ -30,6 +39,18 @@
       <default>500</default>
       <initialValue>500</initialValue>
     </input>
+    <input type="dropdown" token="ngram_range" searchWhenChanged="true">
+      <label>ngram Range</label>
+      <choice value="1-1">1-1</choice>
+      <choice value="2-2">2-2</choice>
+      <choice value="2-3">2-3</choice>
+      <choice value="2-4">2-4</choice>
+      <choice value="3-3">3-3</choice>
+      <choice value="3-4">3-4</choice>
+      <choice value="4-4">4-4</choice>
+      <default>1-1</default>
+      <initialValue>1-1</initialValue>
+    </input>
   </fieldset>
   <row>
     <panel>
@@ -38,7 +59,7 @@
         <search>
           <query>index=main source="$source$"  | eval word=split(text," ") | search word!="" | mvexpand word | eval len=len(word) | table word
 `comment("| bs4 textfield="word" ")`
-| cleantext textfield="word" base_type=lemma_pos remove_stopwords=t ngram_range=1-1 ngram_mix=t keep_orig=t term_min_len=5
+| cleantext textfield="word" base_type=lemma_pos remove_stopwords=t ngram_range=$ngram_range$ ngram_mix=t keep_orig=t term_min_len=$min_word_length$
 | eval pos_zip = mvzip(pos_tag,'word',",")
 
 | eval "word" = no_ne | noop
