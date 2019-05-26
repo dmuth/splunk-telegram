@@ -34,7 +34,7 @@ You should check it out!
    - `SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/2-start-splunk.sh)`
    - You'll be presented with a list of options to confirm, change your environment variables if you like and re-run, otherwise press ENTER to launch Splunk.
 
-By default, Splunk will be listening <a href="https://localhost:8000/">https://localhost:8000/</a>.
+By default, Splunk will be listening at <a href="https://localhost:8000/">https://localhost:8000/</a>.
 
 
 ## Screenshots
