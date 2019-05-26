@@ -2,7 +2,10 @@
 # Splunk Telegram
 
 This app lets you run Splunk against messages from Telegram groups and generate
-graphs absedon the activity in them.
+graphs based on the activity in them.
+
+Splunk Telegram includes a Natural Language Processing (NLP) module which lets
+you extract things like sentiment, Named Entities, etc.
 
 This app is based on my other app, <a href="https://github.com/dmuth/splunk-lab/">Splunk Lab</a>,
 which is a generate Splunk platform build for ingesting data on an ad-hoc basis.
@@ -25,6 +28,10 @@ You should check it out!
    - You'll be presented with a list of options to confirm, change your environment variables if you like and re-run, otherwise press ENTER to launch Splunk.
 
 By default, Splunk will be listening <a href="https://localhost:8000/">https://localhost:8000/</a>.
+
+
+## Screenshots
+
 
 
 ## Exporting Data From Telegram
