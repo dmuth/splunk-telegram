@@ -57,12 +57,18 @@
         <latest>now</latest>
       </search>
     </input>
+    <input type="dropdown" token="deleted" searchWhenChanged="true">
+      <label>Filter Deleted Accounts?</label>
+      <choice value="name != &quot;Deleted Account&quot;">Yes</choice>
+      <choice value="">No</choice>
+      <default></default>
+    </input>
   </fieldset>
   <row>
     <panel>
       <single>
         <search>
-          <query>index=main  source=$source$
+          <query>index=main  source=$source$ $deleted$
 | stats count</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
@@ -82,7 +88,7 @@
       <title>Top Posters By Month</title>
       <chart>
         <search>
-          <query>index=main source=$source$
+          <query>index=main source=$source$ $deleted$
 | timechart span=$span$ limit=$num_top_posters_timechart$ useother=false count by name</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
@@ -128,7 +134,7 @@
       <title>Top Posters Over Time Range</title>
       <chart>
         <search>
-          <query>index=main source=$source$
+          <query>index=main source=$source$ $deleted$
 | stats count by name |sort -count |head $num_top_posters$</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
