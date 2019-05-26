@@ -1,7 +1,7 @@
 <nav search_view="search" color="#ffffff" >
   <view name="telegram_activity" default='true' />
-  <view name="tag_cloud" default='true' />
   <view name="named_entities_cloud" default='true' />
+  <view name="tag_cloud" default='true' />
 
   <view name="search" />
 
