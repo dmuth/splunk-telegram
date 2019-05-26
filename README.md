@@ -41,9 +41,7 @@ By default, Splunk will be listening at <a href="https://localhost:8000/">https:
 
 Telegram has a blog post which explains how to export data <a href="https://telegram.org/blog/export-and-more">over here</a>.
 However, if you follow those instructions, **everything** will be exported, a process which will take hours and hours.
-Instead, we recommend that you export a single channel, group, or conversation at a time.  
-This can be done in the <a href="https://desktop.telegram.org/">Telegram Desktop App</a>
-by going into the converstaion or group and manually exporting it:
+Instead, we recommend that you export a single channel, group, or conversation at a time. This can be done in the <a href="https://desktop.telegram.org/">Telegram Desktop App</a> by going into the converstaion or group and manually exporting it:
 
 <img src="./img/telegram-desktop-export.jpg" />
 
