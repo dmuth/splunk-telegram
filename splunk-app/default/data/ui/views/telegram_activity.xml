@@ -63,12 +63,27 @@
       <choice value="">No</choice>
       <default></default>
     </input>
+    <input type="dropdown" token="name" searchWhenChanged="true">
+      <label>User</label>
+      <fieldForLabel>name</fieldForLabel>
+      <fieldForValue>name</fieldForValue>
+      <search>
+        <query>index=main source=$source$ $deleted$ 
+| stats count by name 
+| sort name</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">ALL</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
   </fieldset>
   <row>
     <panel>
       <single>
         <search>
-          <query>index=main  source=$source$ $deleted$
+          <query>index=main source=$source$ $deleted$ name="$name$"
 | stats count</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
@@ -88,7 +103,7 @@
       <title>Top Posters By Month</title>
       <chart>
         <search>
-          <query>index=main source=$source$ $deleted$
+          <query>index=main source=$source$ $deleted$ name="$name$"
 | timechart span=$span$ limit=$num_top_posters_timechart$ useother=false count by name</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>
@@ -134,7 +149,7 @@
       <title>Top Posters Over Time Range</title>
       <chart>
         <search>
-          <query>index=main source=$source$ $deleted$
+          <query>index=main source=$source$ $deleted$ name="$name$"
 | stats count by name |sort -count |head $num_top_posters$</query>
           <earliest>$range.earliest$</earliest>
           <latest>$range.latest$</latest>

@@ -1,8 +1,8 @@
 <form>
   <label>Named Entities Cloud</label>
-  <description></description>
+  <description>(This report uses NLP and will take some time to run. As such, please click "Submit" to explicitly run the search)</description>
   <fieldset submitButton="true" autoRun="true">
-    <input type="dropdown" token="source" searchWhenChanged="true">
+    <input type="dropdown" token="source" searchWhenChanged="false">
       <label>Source</label>
       <fieldForLabel>base</fieldForLabel>
       <fieldForValue>source</fieldForValue>
@@ -14,14 +14,14 @@
         <latest>now</latest>
       </search>
     </input>
-    <input type="time" token="range" searchWhenChanged="true">
+    <input type="time" token="range" searchWhenChanged="false">
       <label>Time Range</label>
       <default>
         <earliest>-30d@d</earliest>
         <latest>now</latest>
       </default>
     </input>
-    <input type="dropdown" token="min_word_length" searchWhenChanged="true">
+    <input type="dropdown" token="min_word_length" searchWhenChanged="false">
       <label>Min Word Length</label>
       <choice value="3">3</choice>
       <choice value="4">4</choice>
@@ -30,7 +30,7 @@
       <default>5</default>
       <initialValue>5</initialValue>
     </input>
-    <input type="dropdown" token="numwords" searchWhenChanged="true">
+    <input type="dropdown" token="numwords" searchWhenChanged="false">
       <label>Number of Words</label>
       <choice value="100">100</choice>
       <choice value="250">250</choice>
@@ -39,7 +39,7 @@
       <default>500</default>
       <initialValue>500</initialValue>
     </input>
-    <input type="dropdown" token="ngram_range" searchWhenChanged="true">
+    <input type="dropdown" token="ngram_range" searchWhenChanged="false">
       <label>ngram Range</label>
       <choice value="1-1">1-1</choice>
       <choice value="2-2">2-2</choice>
@@ -51,13 +51,27 @@
       <default>1-1</default>
       <initialValue>1-1</initialValue>
     </input>
+    <input type="dropdown" token="name" searchWhenChanged="false">
+      <label>User</label>
+      <fieldForLabel>name</fieldForLabel>
+      <fieldForValue>name</fieldForValue>
+      <search>
+        <query>index=main source=$source$ 
+| stats count by name 
+| sort name</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">ALL</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
   </fieldset>
   <row>
     <panel>
       <viz type="wordcloud_app.wordcloud">
-        <title>(This report uses NLP and will take some time to run)</title>
         <search>
-          <query>index=main source="$source$"  | eval word=split(text," ") | search word!="" | mvexpand word | eval len=len(word) | table word
+          <query>index=main source="$source$" name="$name$" | eval word=split(text," ") | search word!="" | mvexpand word | eval len=len(word) | table word
 `comment("| bs4 textfield="word" ")`
 | cleantext textfield="word" base_type=lemma_pos remove_stopwords=t ngram_range=$ngram_range$ ngram_mix=t keep_orig=t term_min_len=$min_word_length$
 | eval pos_zip = mvzip(pos_tag,'word',",")
