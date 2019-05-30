@@ -58,9 +58,9 @@ The Docker image ships with the <a href="https://splunkbase.splunk.com/app/4066/
 
 ## TODO/Bugs
 
-Only regular messages are supported at this time.  If a photo is found, a note will
+Only regular messages are supported at this time.  If a photo or sticker is found, a note will
 be made that it was a photo of a specified size.  No other media types (including stickers)
-are supported at this time.
+are supported at this time.  Forwarded messages are not counted/supported at this time.
 
 
 ## Contact
