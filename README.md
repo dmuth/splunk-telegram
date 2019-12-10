@@ -58,9 +58,13 @@ The Docker image ships with the <a href="https://splunkbase.splunk.com/app/4066/
 
 ## TODO/Bugs
 
-Only regular messages are supported at this time.  If a photo or sticker is found, a note will
+- Only regular messages are supported at this time.  If a photo or sticker is found, a note will
 be made that it was a photo of a specified size.  No other media types (including stickers)
-are supported at this time.  Forwarded messages are not counted/supported at this time.
+are supported at this time.  
+- Forwarded messages are not counted/supported at this time.
+- Messages that are imported must be in the current directory because of how Docker mounts directories
+  - I may revisit this in the future and instead take a directory as a value to Docker's `-v` argument.
+- I need to add Development instructions and possibly revisit that
 
 
 ## Contact
