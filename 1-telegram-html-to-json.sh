@@ -20,8 +20,8 @@ then
 fi
 
 
-DOCKER_V_MNT="-v $(pwd):/mnt"
-DOCKER_V_LOGS="-v $(pwd)/logs:/logs"
 docker run ${DOCKER_IT} ${DOCKER_V} ${DOCKER_V_LOGS} \
-	-v $(pwd):/mnt  dmuth1/splunk-telegram-python ${DEVEL_PYTHON} $@
+	-v "$(pwd):/mnt" \
+	-v "$(pwd)/logs:/logs" \
+	dmuth1/splunk-telegram-python ${DEVEL_PYTHON} $@
 
