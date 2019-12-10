@@ -20,7 +20,7 @@ then
 fi
 
 
-docker run ${DOCKER_IT} ${DOCKER_V} ${DOCKER_V_LOGS} \
+docker run ${DOCKER_IT} ${DOCKER_V} \
 	-v "$(pwd):/mnt" \
 	-v "$(pwd)/logs:/logs" \
 	dmuth1/splunk-telegram-python ${DEVEL_PYTHON} $@
