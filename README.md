@@ -29,7 +29,7 @@ You should check it out!
 ## Usage
 
 - First step is to convert Telegram's HTML into JSON that Splunk can understand:
-   - `bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/1-telegram-html-to-json.sh path/to/telegram-export/messages\*.html > logs/Group-Name.json`
+   - `bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/1-telegram-html-to-json.sh) path/to/telegram-export/messages\*.html > logs/Group-Name.json`
 - Then, run Splunk:
    - `SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-telegram/master/2-start-splunk.sh)`
    - You'll be presented with a list of options to confirm, change your environment variables if you like and re-run, otherwise press ENTER to launch Splunk.
